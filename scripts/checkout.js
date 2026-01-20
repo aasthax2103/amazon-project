@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
@@ -11,7 +11,7 @@ cart.forEach((cartItem) => {
             matchingProduct=product;
         }
     })
-    checkoutHTML += `<div class="left-box">
+    checkoutHTML += `<div class="left-box js-cart-item-container-${matchingProduct.id}">
                     <div class="left-box-child">
                         <p class="delivery-date">Delivery date: Wednesday, January 14</p>
                         <div class="item-box-container">
@@ -21,7 +21,7 @@ cart.forEach((cartItem) => {
                             <div class="item-info">
                                 <p class="bold-sub-heading">${matchingProduct.name}</p>
                                 <p class="price">$${formatCurrency(matchingProduct.priceCents)}</p>
-                                <p>Quantity: ${cartItem.quantity} <span class="modify-order">Update Delete</span></p>
+                                <p>Quantity: ${cartItem.quantity} <span class="modify-order">Update</span> <span class="modify-order js-delete-link" data-product-id=${matchingProduct.id}>Delete</span></p>
                             </div>
                             <div class="delivery-option">
                                 <p class="bold-sub-heading">Choose a delivery option:</p>
@@ -54,3 +54,15 @@ cart.forEach((cartItem) => {
                 </div>`
 })
 document.querySelector('.js-left-box').innerHTML = checkoutHTML;
+
+document.querySelectorAll('.js-delete-link')
+    .forEach((link)=> {
+        link.addEventListener('click', () => {
+            let productId =  link.dataset.productId;
+            removeFromCart(productId);
+
+            document.querySelector(`.js-cart-item-container-${productId}`).remove();
+        })
+
+    })
+

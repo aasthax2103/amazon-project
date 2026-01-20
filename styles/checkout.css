@@ -88,6 +88,10 @@ p {
     margin-top: 10x;
     margin-bottom: 10px;
 }
+.modify-order:hover {
+    color: rgb(192, 128, 9);
+    cursor: pointer;
+}
 .delivery-option {
     padding-left: 50px;
 }
