@@ -9,6 +9,7 @@ cart.forEach((cartItem) => {
     products.forEach((product) => {
         if (product.id===cartItem.id) {
             matchingProduct=product;
+            
         }
     })
     checkoutHTML += `<div class="left-box js-cart-item-container-${matchingProduct.id}">
@@ -63,6 +64,5 @@ document.querySelectorAll('.js-delete-link')
 
             document.querySelector(`.js-cart-item-container-${productId}`).remove();
         })
-
     })
 

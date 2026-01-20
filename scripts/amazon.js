@@ -47,6 +47,8 @@ function updateCartSize() {
     document.querySelector('.js-cart-size').innerHTML= cartSize;
 }
 
+updateCartSize();
+
 function displayAdded(button) {
     const addedContainer = button.closest('.product').querySelector('.js-added-container');
     addedContainer.style.opacity=1;
