@@ -6,15 +6,19 @@ if (!cart) {
     // CHANGE CART TO THE CODE BELOW IF THERE IS ANY COMPLICATION LATER ON BECAUSE OF EMPTY CART OR LOCAL STORAGE
     // cart = [{
     //     id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-    //     quantity: 2
+    //     quantity: 2,
+    //     deliveryOptionId: '1'
+
     // },
     // {
     //     id: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
-    //     quantity: 1
+    //     quantity: 1,
+    //     deliveryOptionId: '2'
     // },
     // {
     //     id: '54e0eccd-8f36-462b-b68a-8182611d9add',
-    //     quantity: 1
+    //     quantity: 1,
+    //     deliveryOptionId: '1'
     // }]
 
     //These default values will only come on screen when local storage has not been set initially, 
@@ -39,7 +43,8 @@ export function addToCart(productId) {
     else {
         cart.push({
             id: productId,
-            quantity: 1
+            quantity: 1,
+            deliveryOptionId: '1'
         });
     }
     saveToLocalStorage();
@@ -53,5 +58,16 @@ export function removeFromCart(productId) {
         }
     })
     cart=newCart;
+    saveToLocalStorage();
+}
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+    let matchingProduct;
+    cart.forEach((cartItem) => {
+        if (productId===cartItem.id) {
+            matchingProduct = cartItem;
+        }
+    })
+    matchingProduct.deliveryOptionId = deliveryOptionId;
     saveToLocalStorage();
 }
