@@ -71,3 +71,23 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
     matchingProduct.deliveryOptionId = deliveryOptionId;
     saveToLocalStorage();
 }
+
+export function calculateCartSize() {
+    let cartSize = 0;
+
+    cart.forEach((item) => {
+        cartSize+=1;
+    })
+
+    return cartSize;
+}
+
+export function updateCartSize() {
+    let cartSize = 0;
+
+    cart.forEach((item) => {
+        cartSize+=1;
+    })
+
+    document.querySelector('.js-cart-size').innerHTML= cartSize;
+}

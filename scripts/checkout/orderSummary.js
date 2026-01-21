@@ -1,8 +1,9 @@
-import {cart, removeFromCart, updateDeliveryOption} from '../../data/cart.js';
-import {products} from '../../data/products.js';
+import {cart, removeFromCart, updateDeliveryOption, updateCartSize} from '../../data/cart.js';
+import {getProduct, products} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import {deliveryOptions} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import {renderPaymentSummary} from './payementSummary.js';
 
 export function renderOrderSummary() {
 
@@ -12,21 +13,8 @@ export function renderOrderSummary() {
     let checkoutHTML = '';
 
     cart.forEach((cartItem) => {
-        let matchingProduct;
-        products.forEach((product) => {
-            if (product.id===cartItem.id) {
-                matchingProduct=product;
-                
-            }
-        })
-
-        let deliveryOption;
-
-        deliveryOptions.forEach((option) => {
-            if (option.id===cartItem.deliveryOptionId) {
-                deliveryOption=option;
-            }
-        })
+        const matchingProduct = getProduct(cartItem.id);
+        const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
 
         const today = dayjs();
         const date = today.add(deliveryOption.deliveryDays, 'days');
@@ -83,6 +71,8 @@ export function renderOrderSummary() {
             link.addEventListener('click', () => {
                 let productId =  link.dataset.productId;
                 removeFromCart(productId);
+                renderPaymentSummary();
+                updateCartSize();
 
                 document.querySelector(`.js-cart-item-container-${productId}`).remove();
             })
@@ -94,6 +84,9 @@ export function renderOrderSummary() {
                 const {productId, deliveryOptionId} = deliveryOption.dataset;
                 updateDeliveryOption(productId, deliveryOptionId);
                 renderOrderSummary();
+                renderPaymentSummary();
             });
         })
+
+    updateCartSize();
 }
