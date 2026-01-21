@@ -1,4 +1,4 @@
-import {cart, calculateCartSize} from '../../data/cart.js';
+import {cart, updateCartSize} from '../../data/cart.js';
 import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
@@ -23,7 +23,7 @@ export function renderPaymentSummary() {
                         <div class="summary-detail">
                             <div class="summary-top">
                                 <div class="summary-top-left">
-                                    <p>Items (${calculateCartSize()}):</p>
+                                    <p>Items (${updateCartSize()}):</p>
                                     <p>Shipping & handling:</p>
                                     <hr class="invisible-divider">
                                     <p>Total before tax:</p>

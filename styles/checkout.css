@@ -83,6 +83,14 @@ p {
     margin-top: 10x;
     margin-bottom: 10px;
 }
+.quantity-after-updation {
+    display: none;
+}
+.update-quantity {
+    width: 6ch;
+    max-width: 10ch;
+    outline: none;
+}
 .modify-order {
     color: rgb(29, 111, 161);
     margin-top: 10x;

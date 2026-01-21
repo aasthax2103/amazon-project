@@ -15,7 +15,7 @@ products.forEach((product) => {
                     <p class="rating-num">${product.rating.count}</p>
                 </div>
                 <p class="price">$${formatCurrency(product.priceCents)}</p>
-                <select class="quantity">
+                <select class="quantity js-quantity">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -56,9 +56,14 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
         const productId = button.dataset.productId;
 
-        addToCart(productId);
+        const quantitySelect = button.closest('.product').querySelector('.js-quantity');
+        const quantity = Number(quantitySelect.value);
+
+        addToCart(productId, quantity);
         updateCartSize();
         displayAdded(button);
+
+        quantitySelect.value = '1';
     })
 });
 

@@ -21,7 +21,7 @@ export function renderOrderSummary() {
         const formatDate = date.format('dddd, MMMM D');
 
         checkoutHTML += `<div class="left-box js-cart-item-container-${matchingProduct.id}">
-                        <div class="left-box-child">
+                        <div class="left-box-child js-left-box-child">
                             <p class="delivery-date">Delivery date: ${formatDate}</p>
                             <div class="item-box-container">
                                 <div class="item-image-container">
@@ -30,7 +30,12 @@ export function renderOrderSummary() {
                                 <div class="item-info">
                                     <p class="bold-sub-heading">${matchingProduct.name}</p>
                                     <p class="price">$${formatCurrency(matchingProduct.priceCents)}</p>
-                                    <p>Quantity: ${cartItem.quantity} <span class="modify-order">Update</span> <span class="modify-order js-delete-link" data-product-id=${matchingProduct.id}>Delete</span></p>
+                                    <div class="quantity-without-updation">
+                                        <p>Quantity: ${cartItem.quantity} <span class="modify-order js-update-link">Update</span> <span class="modify-order js-delete-link" data-product-id=${matchingProduct.id}>Delete</span></p>
+                                    </div>
+                                    <div class="quantity-after-updation">
+                                        <p>Quantity: <input type="number" min="1" class="update-quantity js-update-quantity" value="${cartItem.quantity}"> <span class="modify-order js-save-link" data-product-id="${matchingProduct.id}">Save</span> <span class="modify-order js-delete-link" data-product-id=${matchingProduct.id}>Delete</span></p>
+                                    </div>
                                 </div>
                                 <div class="delivery-option">
                                     <p class="bold-sub-heading">Choose a delivery option:</p>
@@ -65,6 +70,40 @@ export function renderOrderSummary() {
             
             return deliveryHTML;
     }
+
+    document.querySelectorAll('.js-update-link')
+        .forEach((link) => {
+            link.addEventListener('click', () => {
+                const viewState = link.closest('.js-left-box-child').querySelector('.quantity-without-updation');
+                const editState = link.closest('.js-left-box-child').querySelector('.quantity-after-updation');
+
+                viewState.style.display= 'none';
+                editState.style.display= 'block';
+            })
+        })
+
+    document.querySelectorAll('.js-save-link')
+        .forEach((link) => {
+            link.addEventListener('click', () => {
+                const viewState = link.closest('.js-left-box-child').querySelector('.quantity-without-updation');
+                const editState = link.closest('.js-left-box-child').querySelector('.quantity-after-updation');
+
+                const input = editState.querySelector('.js-update-quantity');
+                const newQuantity = Number(input.value);
+
+                const productId = link.dataset.productId;
+                cart.forEach((cartItem) => {
+                    if (cartItem.id===productId) {
+                        cartItem.quantity=newQuantity;
+                    }
+                })
+                renderOrderSummary();
+                renderPaymentSummary();
+
+                viewState.style.display= 'block';
+                editState.style.display= 'none';
+            })
+        })
 
     document.querySelectorAll('.js-delete-link')
         .forEach((link)=> {
