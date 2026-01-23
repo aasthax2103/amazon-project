@@ -1,0 +1,36 @@
+converting into oops:
+
+1. let cart => 
+const cart =  {
+	cartItems: undefined;
+}
+(we have named the entire object as cart , that is why the let cart variable is renamed as cartItems)
+
+2. export function addToCart() =>
+addToCart()
+(we dont write export function)
+
+3. for accessing any cart variable or function that is inside object eg.
+cart.push=>
+cart.cartItems.push  (but it can be that when we use this object outside somewhere else, we dont pass the parameter as the name cart.. that's why we use 'this')=>
+this.cartItems.push
+
+4. Calling a function outside the object eg.
+loadFromStorage()=>
+cart.loadFromStorage()
+
+5. importing oops file
+import '../../data/cart-oops.js'
+(no import x from y)
+
+6. why oops-> represents just like real world objects
+		   -> simple to manage
+
+7. function- methods
+   variables- properties
+   each object that we generate from a class, is called instance of a class (read point 8)
+
+8. to create multiple objects of the same type like-> normal cart and busniess cart, we use:
+		   -> functions
+		   -> classes  (Do not have parameters if its not a constructor I guess)
+	the name of the functions and classes start with pascal case => (PascalCase)
