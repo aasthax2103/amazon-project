@@ -1,14 +1,15 @@
 class Cart {
     cartItems;
-    localStorageKey;
+    #localStorageKey;
 
     constructor(localStorageKey) {
-        this.localStorageKey = localStorageKey;
-        this.loadFromStorage();
+        this.#localStorageKey = localStorageKey;
+        this.#loadFromStorage();
     }
+    // adding '#' makes the variable or function private, it cannot be accessed outside the class, specially used for all things of constructor shayad
 
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+    #loadFromStorage() {
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
         if (!this.cartItems) {
         this.cartItems = [];
@@ -16,7 +17,7 @@ class Cart {
     }
 
     saveToLocalStorage() {
-        localStorage.setItem(this.localStorageKey , JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey , JSON.stringify(this.cartItems));
     }
 
     addToCart(productId, quantity) {
