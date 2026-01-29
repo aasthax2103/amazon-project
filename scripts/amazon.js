@@ -1,72 +1,75 @@
-import {products} from '../data/products.js';
+import {products, loadProducts} from '../data/products.js';
 import {cart, addToCart, updateCartSize} from '../data/cart.js';
 import {formatCurrency} from './utils/money.js';
 
-let productHTML = '';
+loadProducts(renderProductsGrid);
 
-products.forEach((product) => {
-    productHTML+=`<div class="product">
-                <div class="image-container">
-                    <img class="product-image" src="../assets/${product.image}">
-                </div>
-                <p class="name">${product.name}</p>
-                <div class="rating">
-                    <img class="rating-stars" src="${product.getStars()}">
-                    <p class="rating-num">${product.rating.count}</p>
-                </div>
-                <p class="price">$${product.getPrice()}</p>
-                <div class="quantity-and-size">
-                    <select class="quantity js-quantity">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                    <div class="sizechart">${product.extraInfoHTML()}</div>
-                </div>
-                <div class="added-container js-added-container">
-                    <img class="checkmark" src="../assets/checkmark.png">
-                    <p class="added">Added</p>
-                </div>
-                <button class="add-to-cart js-add-to-cart" data-product-id=${product.id}>Add To Cart</button>
-            </div>`;
-});
+function renderProductsGrid() {
+    let productHTML = '';
 
-document.querySelector('.js-product-container').innerHTML = productHTML;
+    products.forEach((product) => {
+        productHTML+=`<div class="product">
+                    <div class="image-container">
+                        <img class="product-image" src="${product.getImage()}">
+                    </div>
+                    <p class="name">${product.name}</p>
+                    <div class="rating">
+                        <img class="rating-stars" src="${product.getStars()}">
+                        <p class="rating-num">${product.rating.count}</p>
+                    </div>
+                    <p class="price">$${product.getPrice()}</p>
+                    <div class="quantity-and-size">
+                        <select class="quantity js-quantity">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                        <div class="sizechart">${product.extraInfoHTML()}</div>
+                    </div>
+                    <div class="added-container js-added-container">
+                        <img class="checkmark" src="../assets/checkmark.png">
+                        <p class="added">Added</p>
+                    </div>
+                    <button class="add-to-cart js-add-to-cart" data-product-id=${product.id}>Add To Cart</button>
+                </div>`;
+    });
 
-updateCartSize();
+    document.querySelector('.js-product-container').innerHTML = productHTML;
 
-function displayAdded(button) {
-    const addedContainer = button.closest('.product').querySelector('.js-added-container');
-    addedContainer.style.opacity=1;
+    updateCartSize();
 
-    if (addedContainer.timeOutId) {
-        clearTimeout(addedContainer.timeOutId);
+    function displayAdded(button) {
+        const addedContainer = button.closest('.product').querySelector('.js-added-container');
+        addedContainer.style.opacity=1;
+
+        if (addedContainer.timeOutId) {
+            clearTimeout(addedContainer.timeOutId);
+        }
+
+        addedContainer.timeOutId = setTimeout(() => {
+            addedContainer.style.opacity=0;
+        }, 1000);
     }
 
-    addedContainer.timeOutId = setTimeout(() => {
-        addedContainer.style.opacity=0;
-    }, 1000);
+    document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+        button.addEventListener('click', () => {
+            const productId = button.dataset.productId;
+
+            const quantitySelect = button.closest('.product').querySelector('.js-quantity');
+            const quantity = Number(quantitySelect.value);
+
+            addToCart(productId, quantity);
+            updateCartSize();
+            displayAdded(button);
+
+            quantitySelect.value = '1';
+        })
+    });
 }
-
-document.querySelectorAll('.js-add-to-cart').forEach((button) => {
-    button.addEventListener('click', () => {
-        const productId = button.dataset.productId;
-
-        const quantitySelect = button.closest('.product').querySelector('.js-quantity');
-        const quantity = Number(quantitySelect.value);
-
-        addToCart(productId, quantity);
-        updateCartSize();
-        displayAdded(button);
-
-        quantitySelect.value = '1';
-    })
-});
-

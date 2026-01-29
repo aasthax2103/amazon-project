@@ -25,7 +25,7 @@ export function renderOrderSummary() {
                             <p class="delivery-date">Delivery date: ${formatDate}</p>
                             <div class="item-box-container">
                                 <div class="item-image-container">
-                                    <img class="item-image" src="../assets/${matchingProduct.image}">
+                                    <img class="item-image" src="${matchingProduct.getImage()}">
                                 </div>
                                 <div class="item-info">
                                     <p class="bold-sub-heading">${matchingProduct.name}</p>
