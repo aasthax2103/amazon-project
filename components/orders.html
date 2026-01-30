@@ -6,7 +6,9 @@
     </head>
     <body>
         <div class="top-bar">
-            <img class="logo" src="../assets/amazon-logo-white.png">
+            <a href="amazon.html">
+                <img class="logo" src="../assets/amazon-logo-white.png">
+            </a>
             <div class="search-container">
                 <input class="search-box" placeholder="Search">
                 <img class="search-button" src="../assets/search-icon.png">
@@ -16,135 +18,19 @@
                 <br>
                 <span class="order-text">& Orders</span>
             </button>
-            <div>
-                <p class="cart-size js-cart-size">0</p>
-                <img class="cart" src="../assets/cart-icon.png">
-            </div>
+            <a href="checkout.html">
+                <div>
+                    <p class="cart-size js-cart-size">0</p>
+                    <img class="cart" src="../assets/cart-icon.png">
+                </div>
+            </a>
         </div>
         <div class="main-area">
             <p class="heading">Your Orders</p>
-            <div class="order-id-container">
-                <div class="header-box">
-                    <div class="order-placed">
-                        <p class="sub-heading">Order Placed:</p>
-                        <p>January 11</p>
-                    </div>
-                    <div class="total">
-                        <p class="sub-heading">Total</p>
-                        <p>$144.02</p>
-                    </div>
-                    <div class="order-id">
-                        <p class="sub-heading">Order ID:</p>
-                        <p>31b98e0c-8a76-f18f-2eeb-9200f1c9a453</p>
-                    </div>
-                </div>
-                <div class="body-box">
-                    <div class="item-container">
-                        <div class="image-container">
-                            <img class="image" src="../assets/intermediate-composite-basketball.jpg">
-                        </div>
-                        <div class="info">
-                            <p class="item-name">Intermediate Size Basketball</p>
-                            <p>Arriving on: January 20</p>
-                            <p>Quantity: 1</p>
-                            <button class="buy-again">
-                                <img class="buy-again-icon" src="../assets/buy-again.png">
-                                Buy it again
-                            </button>
-                        </div>
-                        <div class="track-container">
-                            <button class="track">Track package</button>
-                        </div>
-                    </div>
-                    <div class="item-container">
-                        <div class="image-container">
-                            <img class="image" src="../assets/black-2-slot-toaster.jpg">
-                        </div>
-                        <div class="info">
-                            <p class="item-name">2 Slot Toaster - Black</p>
-                            <p>Arriving on: January 20</p>
-                            <p>Quantity: 2</p>
-                            <button class="buy-again">
-                                <img class="buy-again-icon" src="../assets/buy-again.png">
-                                Buy it again
-                            </button>
-                        </div>
-                        <div class="track-container">
-                            <button class="track">Track package</button>
-                        </div>
-                    </div>
-                    <div class="item-container">
-                        <div class="image-container">
-                            <img class="image" src="../assets/6-piece-white-dinner-plate-set.jpg">
-                        </div>
-                        <div class="info">
-                            <p class="item-name">6 Piece White Dinner Plate Set</p>
-                            <p>Arriving on: January 12</p>
-                            <p>Quantity: 3</p>
-                            <button class="buy-again">
-                                <img class="buy-again-icon" src="../assets/buy-again.png">
-                                Buy it again
-                            </button>
-                        </div>
-                        <div class="track-container">
-                            <button class="track">Track package</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="order-id-container">
-                <div class="header-box">
-                    <div class="order-placed">
-                        <p class="sub-heading">Order Placed:</p>
-                        <p>January 10</p>
-                    </div>
-                    <div class="total">
-                        <p class="sub-heading">Total</p>
-                        <p>$35.06</p>
-                    </div>
-                    <div class="order-id">
-                        <p class="sub-heading">Order ID:</p>
-                        <p>27cba69d-4c3d-4098-b42d-ac7fa62b7664</p>
-                    </div>
-                </div>
-                <div class="body-box">
-                    <div class="item-container">
-                        <div class="image-container">
-                            <img class="image" src="../assets/athletic-cotton-socks-6-pairs.jpg">
-                        </div>
-                        <div class="info">
-                            <p class="item-name">Black and Gray Athletic Cotton Socks - 6 Pairs</p>
-                            <p>Arriving on: January 14</p>
-                            <p>Quantity: 1</p>
-                            <button class="buy-again">
-                                <img class="buy-again-icon" src="../assets/buy-again.png">
-                                Buy it again
-                            </button>
-                        </div>
-                        <div class="track-container">
-                            <button class="track">Track package</button>
-                        </div>
-                    </div>
-                    <div class="item-container">
-                        <div class="image-container">
-                            <img class="image" src="../assets/adults-plain-cotton-tshirt-2-pack-teal.jpg">
-                        </div>
-                        <div class="info">
-                            <p class="item-name">Adults Plain Cotton T-Shirt - 2 Pack</p>
-                            <p>Arriving on: January 20</p>
-                            <p>Quantity: 2</p>
-                            <button class="buy-again">
-                                <img class="buy-again-icon" src="../assets/buy-again.png">
-                                Buy it again
-                            </button>
-                        </div>
-                        <div class="track-container">
-                            <button class="track">Track package</button>
-                        </div>
-                    </div>
-                </div>
-                
+            <div class="js-order-container">
+                <!-- buy products -->
             </div>
         </div>
+        <script src="../scripts/buy.js" type="module"></script>
     </body>
 </html>

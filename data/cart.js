@@ -82,3 +82,8 @@ export function updateCartSize() {
     document.querySelector('.js-cart-size').innerHTML= cartSize;
     return cartSize;
 }
+
+export function clearCart() {
+    cart.length = 0;
+    saveToLocalStorage();
+}

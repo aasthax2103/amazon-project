@@ -1,4 +1,4 @@
-import {cart, updateCartSize} from '../../data/cart.js';
+import {cart, updateCartSize, clearCart} from '../../data/cart.js';
 import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
@@ -54,6 +54,12 @@ export function renderPaymentSummary() {
     document.querySelector('.js-place-order')
         .addEventListener('click', async () => {
             try {
+
+                if (!cart || cart.length === 0) {
+                    alert('Your cart is empty.');
+                    return;
+                }
+
                 const response = await fetch('https://supersimplebackend.dev/orders', {
                     method: 'Post',
                     headers: {
@@ -70,6 +76,10 @@ export function renderPaymentSummary() {
 
                 const order = await response.json();
                 addOrder(order);
+
+                clearCart();
+                updateCartSize();
+
             } catch (error) {
                 console.log('Unexpected error. Try again later.');
             }
