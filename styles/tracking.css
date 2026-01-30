@@ -119,9 +119,6 @@ p {
     font-size: 20px;
     font-weight: bold;
 }
-.state-completed {
-    color: rgb(6, 121, 6);
-}
 .bar-outline {
     border-style: solid;
     border-width: 1px;
@@ -135,5 +132,4 @@ p {
     background-color: green;
     height: 24px;
     border-radius: 12px;
-    width: 5%;
 }

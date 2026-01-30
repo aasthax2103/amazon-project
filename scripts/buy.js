@@ -5,6 +5,9 @@ import {formatCurrency} from './utils/money.js';
 import { cart, updateCartSize, addToCart } from "../data/cart.js";
 
 function renderBuyPage() {
+
+    updateCartSize();
+
     let orderContainerHTML = '';
 
     orders.forEach((order) => {
@@ -29,9 +32,9 @@ function renderBuyPage() {
                                     Buy it again
                                 </button>
                             </div>
-                            <div class="track-container">
+                            <a class="track-container" href="tracking.html?orderId=${order.id}&productId=${item.productId}">
                                 <button class="track">Track package</button>
-                            </div>
+                            </a>
                         </div>`
         })
 

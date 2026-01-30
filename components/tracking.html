@@ -6,7 +6,9 @@
     </head>
     <body>
         <div class="top-bar">
-            <img class="logo" src="../assets/amazon-logo-white.png">
+            <a href="amazon.html">
+                <img class="logo" src="../assets/amazon-logo-white.png">
+            </a>
             <div class="search-container">
                 <input class="search-box" placeholder="Search">
                 <img class="search-button" src="../assets/search-icon.png">
@@ -16,25 +18,21 @@
                 <br>
                 <span class="order-text">& Orders</span>
             </button>
-            <div>
-                <p class="cart-size js-cart-size">0</p>
-                <img class="cart" src="../assets/cart-icon.png">
-            </div>
+            <a href="checkout.html">
+                <div>
+                    <p class="cart-size js-cart-size">0</p>
+                    <img class="cart" src="../assets/cart-icon.png">
+                </div>
+            </a>
         </div>
         <div class="main-body">
-            <p class="all-orders" ul>View all orders</p>
-            <p class="arrival">Arriving on Tuesday, January 20</p>
-            <p class="normal-text">Intermediate Size Basketball</p>
-            <p class="normal-text">Quantity: 1</p>
-            <img class="image" src="../assets/intermediate-composite-basketball.jpg">
-            <div class="state">
-                <p class="state-completed" >Preparing</p>
-                <p>Shipped</p>
-                <p>Delivered</p>
-            </div>
-            <div class="bar-outline">
-                <div class="bar"></div>
+            <a href="./orders.html">
+                <p class="all-orders" ul>View all orders</p>
+            </a>
+            <div class="js-track-container">
+                <!-- tracking.js -->
             </div>
         </div>
+        <script src="../scripts/tracking.js" type="module"></script>
     </body>
 </html>
