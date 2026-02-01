@@ -1,7 +1,7 @@
 import {products, loadProductsFetch} from '../data/products.js';
 import {cart, addToCart, updateCartSize} from '../data/cart.js';
 import {formatCurrency} from './utils/money.js';
-import { getHeaderHTML } from './header.js';
+import { getHeaderHTML, searchFunctionality } from './header.js';
 
 async function loadPage() {
     try {
@@ -16,10 +16,26 @@ loadPage();
 function renderProductsGrid() {
 
     document.querySelector('.js-header').innerHTML = getHeaderHTML();
+    searchFunctionality();
+    const url = new URL(window.location.href);
+    const searchParam = url.searchParams.get('search');
+
+    let filteredProducts = products;
+    if (searchParam && searchParam.trim() !== '') {
+        filteredProducts = products.filter((product) => {
+            let searchParamLowerCase = searchParam.toLowerCase();
+            let nameMatch = product.name.toLowerCase().includes(searchParamLowerCase);
+            let keywordMatch = product.keywords && product.keywords.some((keyword) => {
+                return keyword.toLowerCase().includes(searchParamLowerCase);
+            })
+            return nameMatch || keywordMatch;
+        })
+        document.querySelector('.js-search-box').value = searchParam;
+    }
 
     let productHTML = '';
 
-    products.forEach((product) => {
+    filteredProducts.forEach((product) => {
         productHTML+=`<div class="product">
                     <div class="image-container">
                         <img class="product-image" src="${product.getImage()}">

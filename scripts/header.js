@@ -3,8 +3,8 @@ export function getHeaderHTML() {
                         <img class="logo" src="../assets/amazon-logo-white.png">
                     </a>
                     <div class="search-container">
-                        <input class="search-box" placeholder="Search">
-                        <img class="search-button" src="../assets/search-icon.png">
+                        <input class="search-box js-search-box" placeholder="Search">
+                        <img class="search-button js-search-button" src="../assets/search-icon.png">
                     </div>
                     <a class="returns" href="../components/orders.html">
                         Returns
@@ -17,4 +17,22 @@ export function getHeaderHTML() {
                     </a>`
 
     return header;
+}
+
+export function searchFunctionality() {
+    const searchBox = document.querySelector('.js-search-box');
+
+    searchBox.addEventListener('keydown', (e) => {
+        if (e.key == 'Enter') {
+            const searchBoxValue = searchBox.value.trim();
+            window.location.href=`amazon.html?search=${encodeURIComponent(searchBoxValue)}`;
+        }
+    })
+
+    const searchButton = document.querySelector('.js-search-button');
+
+    searchButton.addEventListener('click', () => {
+        const searchBoxValue = searchBox.value.trim();
+        window.location.href=`amazon.html?search=${encodeURIComponent(searchBoxValue)}`;
+    })
 }

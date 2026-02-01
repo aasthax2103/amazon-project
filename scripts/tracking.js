@@ -2,7 +2,7 @@ import { updateCartSize } from "../data/cart.js";
 import {getOrder, getExactProductFromOrder} from "../data/orders.js";
 import {getProduct, loadProductsFetch} from "../data/products.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { getHeaderHTML } from "./header.js";
+import { getHeaderHTML, searchFunctionality } from "./header.js";
 
 const url = new URL(window.location.href);
 const orderId = url.searchParams.get('orderId');
@@ -12,6 +12,7 @@ loadProductsFetch().then(() => {
 
     document.querySelector('.js-header').innerHTML = getHeaderHTML();
     updateCartSize();
+    searchFunctionality();
 
     const order = getOrder(orderId);
     const product = getProduct(productId);

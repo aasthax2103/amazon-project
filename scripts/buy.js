@@ -3,12 +3,13 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { getProduct, loadProductsFetch, products } from "../data/products.js";
 import {formatCurrency} from './utils/money.js';
 import { cart, updateCartSize, addToCart } from "../data/cart.js";
-import { getHeaderHTML } from "./header.js";
+import { getHeaderHTML, searchFunctionality } from "./header.js";
 
 function renderBuyPage() {
 
     document.querySelector('.js-header').innerHTML = getHeaderHTML();
     updateCartSize();
+    searchFunctionality();
 
     let orderContainerHTML = '';
 
@@ -75,15 +76,6 @@ function renderBuyPage() {
             updateCartSize();
 
             button.innerHTML = '✓ Added';
-
-            if (button.timeoutId) {
-                clearTimeout(button.timeoutId);
-            }
-
-            button.timeoutId = setTimeout(() => {
-                button.innerHTML =`<img class="buy-again-icon" src="../assets/buy-again.png">
-                                    Buy it again`
-            }, 1200);
         });
     });
 }
